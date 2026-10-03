@@ -1,6 +1,6 @@
 // background.js - Chrome extension service worker
 
-const VERSION = '1.3';
+const VERSION = '1.5';
 const HIGH_PRECISION_CHECK_MS = 10;
 const EARLY_OPEN_MS = 1500;
 const RELOAD_INTERVAL_MS = 250;
