@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>搶票助手 | 下載與安裝</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #090909; color: #efefef; font-family: system-ui, sans-serif; line-height: 1.75; }
+    main { width: min(800px, calc(100% - 40px)); margin: auto; padding: 32px 0 64px; }
+    nav { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid #303035; padding-bottom: 18px; }
+    a { color: #80baff; text-underline-offset: 4px; }
+    header { padding: 40px 0 24px; }
+    h1 { font-size: 32px; line-height: 1.3; margin: 0 0 12px; }
+    h2 { font-size: 20px; margin: 0 0 12px; }
+    p { color: #b9b9c3; margin: 10px 0; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 24px 0 12px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 18px; border: 0; border-radius: 6px; background: #d91f35; color: white; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; }
+    .button:hover { background: #b9192c; }
+    .secondary { background: #25252b; }
+    .secondary:hover { background: #35353d; }
+    section { border-top: 1px solid #303035; padding: 28px 0; }
+    .number { color: #ff6576; font-size: 14px; margin-right: 10px; }
+    code { background: #212126; padding: 3px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+    .files, .address { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 16px 0; }
+    label { display: block; margin: 16px 0 6px; font-weight: 600; }
+    input { width: 100%; min-height: 46px; border: 1px solid #54545f; border-radius: 6px; padding: 10px 12px; background: #17171b; color: white; font: 16px ui-monospace, monospace; }
+    input:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid #80baff; outline-offset: 3px; }
+    .status { min-height: 28px; color: #80baff; }
+    details { border-bottom: 1px solid #303035; padding: 16px 0; }
+    summary { cursor: pointer; font-weight: 600; }
+    footer { padding-top: 24px; color: #b9b9c3; font-size: 14px; }
+    @media (max-width: 480px) { main { width: calc(100% - 32px); } h1 { font-size: 28px; } nav { font-size: 14px; } .actions .button { width: 100%; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="主選單"><strong>搶票助手</strong><a href="./index.html">返回搶票系統</a></nav>
+    <header>
+      <h1>下載與安裝搶票助手</h1>
+      <p>使用電腦版 Chrome 完成安裝，再開啟搶票系統。首次設定後，使用同一個瀏覽器即可繼續使用。</p>
+      <div class="actions">
+        <a class="button" href="./downloads/Google-Forms-Sniper-Extension.zip" download>下載擴充功能 ZIP</a>
+        <a href="#connect">已安裝，前往連線設定</a>
+      </div>
+      <p>下載後請先解壓縮；Chrome 無法直接載入 ZIP。請保留解壓縮後的資料夾。</p>
+    </header>
+    <section>
+      <h2><span class="number">01</span>解壓縮下載檔案</h2>
+      <p>在 ZIP 上按右鍵，選擇「解壓縮全部」。開啟解壓縮後的資料夾，確認包含下列四個檔案：</p>
+      <div class="files"><code>manifest.json</code><code>background.js</code><code>popup.html</code><code>popup.js</code></div>
+    </section>
+    <section>
+      <h2><span class="number">02</span>載入 Chrome 擴充功能</h2>
+      <div class="address"><code>chrome://extensions</code><button class="button secondary" id="copyAddress" type="button">複製管理頁網址</button></div>
+      <p id="copyStatus" class="status" role="status"></p>
+      <ol>
+        <li>將上述網址貼到 Chrome 網址列，按 Enter。</li>
+        <li>開啟右上角的「開發人員模式」。</li>
+        <li>點選「載入未封裝項目」。</li>
+        <li>選擇直接包含 <code>manifest.json</code> 的資料夾。</li>
+      </ol>
+      <p>看到「Google Forms Sniper」且開關已啟用，就代表載入成功。</p>
+    </section>
+    <section id="connect">
+      <h2><span class="number">03</span>連線到搶票系統</h2>
+      <p>從 Chrome 擴充功能管理頁複製「Google Forms Sniper」下方的 ID。請使用自己電腦顯示的 ID。</p>
+      <form id="connectForm">
+        <label for="extensionId">擴充功能 ID</label>
+        <input id="extensionId" name="extensionId" placeholder="貼上 32 碼擴充功能 ID" maxlength="32" required pattern="[a-p]{32}" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="connectStatus">
+        <p id="connectStatus" class="status" role="status">ID 為 32 個 a 到 p 的小寫英文字母。</p>
+        <button class="button" type="submit">儲存並開啟搶票系統</button>
+      </form>
+      <p>進入系統後，請確認顯示「搶票助手已連線」。輸入表單網址並先執行「登入檢查」，完成 Google 登入後再設定時間。</p>
+    </section>
+    <section>
+      <h2>安裝遇到問題</h2>
+      <details><summary>載入時顯示找不到 manifest.json</summary><p>請先解壓縮 ZIP，並選擇直接包含 manifest.json 的那一層資料夾，不要選 ZIP 或外層資料夾。</p></details>
+      <details><summary>系統顯示找不到擴充功能</summary><p>確認擴充功能已啟用，重新複製自己的 ID，回到上方連線設定。若剛安裝，請重新整理搶票系統頁面。公司或學校管理的 Chrome 可能限制安裝。</p></details>
+      <details><summary>如何更新擴充功能？</summary><p>重新下載 ZIP，將新檔案解壓縮並覆蓋原本資料夾內的四個檔案。在 chrome://extensions 點選該擴充功能的「重新載入」按鈕，再重新整理搶票系統。若移除後重新安裝，請重新確認 ID。</p></details>
+      <details><summary>手機可以使用嗎？</summary><p>本安裝流程適用於電腦版 Chrome，手機版 Chrome 無法用這個方式載入擴充功能。</p></details>
+    </section>
+    <footer>分享本頁網址即可讓朋友取得下載檔案與安裝步驟。每位朋友仍需在自己的電腦完成安裝。</footer>
+  </main>
+  <script>
+    const input = document.getElementById('extensionId');
+    try {
+      const saved = localStorage.getItem('sniperExtId');
+      if (saved && /^[a-p]{32}$/.test(saved)) input.value = saved;
+    } catch (_) { /* The URL also carries the ID when storage is unavailable. */ }
+    document.getElementById('copyAddress').addEventListener('click', async () => {
+      const status = document.getElementById('copyStatus');
+      try {
+        await navigator.clipboard.writeText('chrome://extensions');
+        status.textContent = '已複製，請貼到 Chrome 網址列。';
+      } catch (_) {
+        status.textContent = '無法自動複製，請手動複製 chrome://extensions。';
+      }
+    });
+    document.getElementById('connectForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const id = input.value.trim();
+      if (!/^[a-p]{32}$/.test(id)) return;
+      try { localStorage.setItem('sniperExtId', id); } catch (_) { /* Continue with the URL parameter. */ }
+      const target = new URL('./index.html', location.href);
+      target.searchParams.set('ext', id);
+      location.href = target.href;
+    });
+  </script>
+</body>
+</html>
